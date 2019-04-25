@@ -6,6 +6,20 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from blog.models import Post
 
 
+def index(request):
+    num_posts = Post.objects.all().count()
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+    # Отрисовка HTML-шаблона index.html с данными внутри
+    # переменной контекста context
+    return render(
+        request,
+        'index.html',
+        context={'num_posts': num_posts,
+                 'num_visits': num_visits},  # num_visits appended
+    )
+
+
 def home(request):
     postList = Post.objects.filter(visible='1')
     paginator = Paginator(postList, 2)

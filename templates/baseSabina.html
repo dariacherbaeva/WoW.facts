@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>WoW.facts();</title>
+    <link rel="stylesheet" type="text/css" href="{%  static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+</head>
+
+<body>
+<div>
+    <div class="p-3 head-color head-container shadow d-flex flex-wrap align-content-center ">
+        <div class="head-text"><h1 class="head-text">WoW.facts();</h1></div>
+
+        <div class="profile-mini  ">
+            <img src="https://pp.userapi.com/c852216/v852216804/5e0f2/aebNxlHamYY.jpg" class="rounded-circle"
+                 style="width:50px; height: 50px;">
+            <a href="#" style="color: black">Sabina</a>
+            <button class="btn btn-outline-secondary btn-sm">Выйти</button>
+        </div>
+    </div>
+</div>
+<div class = "content container ">
+    <div class = "row">
+        <div class = "col-md-8">
+            {% block content %}
+            {% endblock %}
+
+            <ul class="nav menu text-right flex-column">
+                <li class="nav-item active">
+                    <a class="nav-link  "  href="#">
+                        История
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+
+                        Наука
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+
+                        Спорт
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+
+                        Животные
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

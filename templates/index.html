@@ -1,0 +1,16 @@
+{% extends "baseSabina.html" %}
+
+{% block content %}
+<h1>WoW.facts(); </h1>
+
+    <p>Welcome to <em>WoW.facts();</em>, здесь вы найдете множество постов с интересными фактами о нашем многогранном мире </p>
+<h2>ОООчень интересные факты</h2>
+
+  <p>В данный момент на нашем сайте :</p>
+  <ul>
+    <li><strong>Posts:</strong> {{ num_posts }}</li>
+  </ul>
+
+    <p>You have visited this page {{ num_visits }}{% if num_visits == 1 %} time{% else %} times{% endif %}.</p>
+
+{% endblock %}
