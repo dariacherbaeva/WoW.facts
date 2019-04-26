@@ -1,5 +1,7 @@
+from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -43,12 +45,37 @@ def single(request, id=None):
     }
     return render(request, "partial/single.html", context)
 
-
+"""
 def add_like(request, slug):
     try:
-        article = get_object_or_404(Post, slug=slug)
-        article.likes += 1
-        article.save()
+        post = get_object_or_404(Post, slug=slug)
+        post.like += 1
+        post.save()
     except ObjectDoesNotExist:
         return Http404
     return redirect(request.GET.get('next', '/'))
+"""
+
+
+@login_required
+def add_like(request):
+
+    ans_id = None
+    if request.method == 'GET':
+        ans_id = request.GET['answer_id']
+
+    likes = 0
+    if ans_id:
+        ans = Post.objects.get(id=(int(ans_id)))
+        if ans:
+            likes = ans.likes + 1
+            ans.likes = likes
+            ans.save()
+
+    return HttpResponse(likes)
+
+
+def logout(request):
+    auth.logout(request)
+    # Перенаправление на страницу.
+    return HttpResponseRedirect("/account/loggedout/")

@@ -1,5 +1,4 @@
-{% extends "baseSabina.html" %}
-
+{% extends 'baseSabina.html' %}
 {% block content %}
 
 {% if form.errors %}
@@ -28,12 +27,10 @@
 </div>
 
 <div>
-  <input type="submit" value="login" />
+  <input type="submit" value="Войти" />
   <input type="hidden" name="next" value="{{ next }}" />
 </div>
 </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
 {% endblock %}

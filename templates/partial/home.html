@@ -1,17 +1,24 @@
 {% extends 'baseSabina.html' %}
-{% block head %}
-    <title>WoW.facts();</title>
-    <meta name="description" content="{{ desc }}"/>
-    <meta name="keywords" content="{{ key }}"/>
-{% endblock %}
+{% load static %}
 
-{% block body %}
+{% block content %}
     <h1>WoW.facts();</h1>
     <h2>Main page </h2>
+
     {% if not posts %}
         <b>Статьи не найдены</b>
     {% else %}
         {% for obj in posts %}
+            <div class="post">
+            <div class="container-fluid no-padding">
+                {{ obj.text }}
+            </div>
+            {% if user.is_authenticated %}
+                <button class="btn btn-default likes-button" type="button" data-ansid="{{ answer.id }}">
+                    like | <strong id="like_count">{{ obj.likes }}</strong>
+                </button>
+
+            {% endif %}
             <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
             <img src="{{ obj.image.url }}" alt="">
             <p>{{ obj.content|truncatechars:70 }}</p>
@@ -20,11 +27,12 @@
         {% endfor %}
     {% endif %}
 
-    {% if posts.has_previous %}
-        <a href="?page={{ posts.previous_page_number }}">Назад</a>
-    {% endif %}
-    <span>{{ posts.number }} / {{ posts.num_pages }}</span>
-    {% if posts.has_next %}
-        <a href="?page={{ posts.next_page_number }}">Вперед</a>
-    {% endif %}
+{% if posts.has_previous %}
+    <a href="?page={{ posts.previous_page_number }}">Назад</a>
+{% endif %}
+<span>{{ posts.number }} / {{ posts.num_pages }}</span>
+{% if posts.has_next %}
+    <a href="?page={{ posts.next_page_number }}">Вперед</a>
+{% endif %}
+</div>
 {% endblock %}

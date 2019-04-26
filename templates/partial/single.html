@@ -1,15 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'baseSabina.html' %}
 {% block head %}
 <title>{{ post.title }}</title>
 <meta name="description" content="{{ post.description }}"/>
 <meta name="keywords" content="{{ post.keywords }}"/>
 {% endblock %}
 
-{% block body %}
+{% block content %}
   {% if post.visible %}
     <h1>{{ post.title }}</h1>
     <img src="{{ post.image.url }}" alt="">
     <p>{{ post.content }}</p>
+       <div class="container-fluid no-padding">
+                {{ post.text }}
+            </div>
+
+            {% if user.is_authenticated %}
+                <button class="btn btn-default likes-button" type="button" data-ansid="{{ answer.id }}">
+                    like | <strong id="like_count">{{ post.likes }}</strong>
+                </button>
+            {% endif %}
 
   {% else %}
     <p>Страница не найдена</p>
