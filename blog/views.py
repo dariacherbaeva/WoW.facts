@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils import timezone
+
 
 from blog.models import Post
 
@@ -16,7 +18,7 @@ def index(request):
     # переменной контекста context
     return render(
         request,
-        'index.html',
+        'partial/index.html',
         context={'num_posts': num_posts,
                  'num_visits': num_visits},  # num_visits appended
     )
@@ -60,13 +62,13 @@ def add_like(request, slug):
 @login_required
 def add_like(request):
 
-    ans_id = None
+    post_id = None
     if request.method == 'GET':
-        ans_id = request.GET['answer_id']
+        post_id = request.GET['post_id']
 
     likes = 0
-    if ans_id:
-        ans = Post.objects.get(id=(int(ans_id)))
+    if post_id:
+        ans = Post.objects.get(id=(int(post_id)))
         if ans:
             likes = ans.likes + 1
             ans.likes = likes
@@ -78,4 +80,6 @@ def add_like(request):
 def logout(request):
     auth.logout(request)
     # Перенаправление на страницу.
-    return HttpResponseRedirect("/account/loggedout/")
+    return HttpResponseRedirect("/account/logged_out/")
+
+

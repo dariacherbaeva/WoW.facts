@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>WoW.facts();</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+<div>
+    <div class="p-3 head-color head-container shadow d-flex flex-wrap align-content-center ">
+        <div class="head-text"><h1 class="head-text">WoW.facts();</h1></div>
+        {% if user.is_authenticated %}
+            <div class=" profile-mini">
+                <a href="#" style="color: black">{{ user.username }} </a>
+                <button class="btn btn-outline-secondary btn-sm" >
+                    <a href="{% url 'logout' %}">Выйти</a>
+                </button>
+            </div>
+        {% else %}
+            <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+        {% endif %}
+    </div>
+</div>
+
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

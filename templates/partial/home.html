@@ -1,4 +1,4 @@
-{% extends 'baseSabina.html' %}
+{% extends 'partial/baseSabina.html' %}
 {% load static %}
 
 {% block content %}
@@ -13,17 +13,25 @@
             <div class="container-fluid no-padding">
                 {{ obj.text }}
             </div>
+            <div class="container-fluid  author-question">
+
+            </div>
             {% if user.is_authenticated %}
-                <button class="btn btn-default likes-button" type="button" data-ansid="{{ answer.id }}">
+                <button class="btn btn-default likes-button" type="button" data-ansid="{{ odj.id }}">
                     like | <strong id="like_count">{{ obj.likes }}</strong>
                 </button>
 
             {% endif %}
             <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
-            <img src="{{ obj.image.url }}" alt="">
+            {% if obj.image %}
+                <p><img src="{{ obj.image.url }}"></p>
+            {% else %}
+                <p></p>
+            {% endif %}
             <p>{{ obj.content|truncatechars:70 }}</p>
             <span>{{ obj.timestamp }}</span>
             <br><br><br>
+            <p>by: {{ obj.author.username }}</p>
         {% endfor %}
     {% endif %}
 
