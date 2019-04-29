@@ -80,4 +80,6 @@ target/
 local_settings.py
 
 .env
+.idea
 db.sqlite3
+myvenv
