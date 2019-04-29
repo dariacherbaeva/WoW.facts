@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -5,7 +7,6 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
-
 
 from blog.models import Post
 
@@ -47,17 +48,18 @@ def single(request, id=None):
     }
     return render(request, "partial/single.html", context)
 
-"""
-def add_like(request, slug):
-    try:
-        post = get_object_or_404(Post, slug=slug)
+
+def add_like(request):
+    if request.POST:
+        post = Post.objects.get(pk=request.POST.get('post_id'))
         post.like += 1
         post.save()
-    except ObjectDoesNotExist:
-        return Http404
-    return redirect(request.GET.get('next', '/'))
-"""
+    # return render(request, "partial/home.html")
+    return redirect(request.GET.get('next', '/home/'))
 
+# return HttpResponseRedirect('/')
+
+"""
 
 @login_required
 def add_like(request):
@@ -75,6 +77,7 @@ def add_like(request):
             ans.save()
 
     return HttpResponse(likes)
+    """
 
 
 def logout(request):
@@ -83,3 +86,10 @@ def logout(request):
     return HttpResponseRedirect("/account/logged_out/")
 
 
+def post(request):
+    if request.method == "POST":  # os request.GET()
+        get_value = request.body
+        # Do your logic here coz you got data in `get_value`
+        data = {}
+        data['result'] = 'you made a request'
+        return HttpResponse(json.dumps(data), content_type="application/json")

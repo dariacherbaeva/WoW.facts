@@ -1,4 +1,4 @@
-{% extends 'partial/baseSabina.html' %}
+{% extends 'partial/baseD.html' %}
 {% block head %}
 <title>{{ post.title }}</title>
 <meta name="description" content="{{ post.description }}"/>
@@ -15,9 +15,11 @@
             </div>
 
             {% if user.is_authenticated %}
-                <button class="btn btn-default likes-button" type="button" data-ansid="{{ answer.id }}">
-                    like | <strong id="like_count">{{ post.likes }}</strong>
-                </button>
+                 <form action="{{ obj.id }}/add_like" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ obj.id }}" id="post_id" name="post_id">
+                    <input class="btn btn-info" type="submit" value="Like">
+                </form>
             {% endif %}
 
   {% else %}

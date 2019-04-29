@@ -1,4 +1,4 @@
-{% extends 'partial/baseSabina.html' %}
+{% extends 'partial/baseD.html' %}
 {% load static %}
 
 {% block content %}
@@ -13,26 +13,29 @@
             <div class="container-fluid no-padding">
                 {{ obj.text }}
             </div>
-            <div class="container-fluid  author-question">
 
-            </div>
             {% if user.is_authenticated %}
-                <button class="btn btn-default likes-button" type="button" data-ansid="{{ odj.id }}">
-                    like | <strong id="like_count">{{ obj.likes }}</strong>
-                </button>
 
+                <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
+                {% if obj.image %}
+                    <p><img src="{{ obj.image.url }}"></p>
+                {% else %}
+                    <p></p>
+                {% endif %}
+                <p>{{ obj.content|truncatechars:70 }}</p>
+                <p class="text-black">Likes: {{ obj.like }}</p>
+                <hr>
+                <form action="{{ obj.id }}/add_like" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ obj.id }}" id="post_id" name="post_id">
+                    <input class="btn btn-info" type="submit" value="Like">
+                </form>
+                <span>{{ obj.timestamp }}</span>
+                <br><br><br>
+                <p>by: {{ obj.author.username }}</p>
             {% endif %}
-            <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
-            {% if obj.image %}
-                <p><img src="{{ obj.image.url }}"></p>
-            {% else %}
-                <p></p>
-            {% endif %}
-            <p>{{ obj.content|truncatechars:70 }}</p>
-            <span>{{ obj.timestamp }}</span>
-            <br><br><br>
-            <p>by: {{ obj.author.username }}</p>
         {% endfor %}
+
     {% endif %}
 
 {% if posts.has_previous %}
@@ -43,4 +46,16 @@
     <a href="?page={{ posts.next_page_number }}">Вперед</a>
 {% endif %}
 </div>
+    <h4>Возможно, вас заинтересует:</h4>
+        <div class=" recommendation-posts d-flex flex-nowrap">
+            <div class="card recommendation-post ">
+               <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
+                {% if obj.image %}
+                    <p><img src="{{ obj.image.url }}"></p>
+                {% else %}
+                    <p></p>
+                {% endif %}
+                <p>{{ obj.content|truncatechars:70 }}</p>
+            </div>
+
 {% endblock %}

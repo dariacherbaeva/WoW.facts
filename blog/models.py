@@ -13,9 +13,10 @@ class Post(models.Model):
     visible = models.BooleanField(default=1)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-    likes = models.IntegerField(default='0')
+    like = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default='0')
     date = models.DateTimeField(default=datetime.datetime.now)
+   # user_count = models.IntegerField(default='0')
 
     def __unicode__(self):
         return self.title
@@ -28,3 +29,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-id", "-timestamp"]
+
+"""
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    like = models.IntegerField(default='0')
+"""
