@@ -30,6 +30,17 @@ class Post(models.Model):
     class Meta:
         ordering = ["-id", "-timestamp"]
 
+
+class ILike(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
+
+
+class Similarity(models.Model):
+    user1 = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE)
+    user2 = models.ForeignKey(User, related_name='user2', on_delete=models.CASCADE)
+    k = models.SmallIntegerField(default=0)
+
 """
 class UserProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

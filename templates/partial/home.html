@@ -10,10 +10,6 @@
     {% else %}
         {% for obj in posts %}
             <div class="post">
-            <div class="container-fluid no-padding">
-                {{ obj.text }}
-            </div>
-
             {% if user.is_authenticated %}
 
                 <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
@@ -34,6 +30,7 @@
                 <br><br><br>
                 <p>by: {{ obj.author.username }}</p>
             {% endif %}
+            </div>
         {% endfor %}
 
     {% endif %}
@@ -45,17 +42,6 @@
 {% if posts.has_next %}
     <a href="?page={{ posts.next_page_number }}">Вперед</a>
 {% endif %}
-</div>
-    <h4>Возможно, вас заинтересует:</h4>
-        <div class=" recommendation-posts d-flex flex-nowrap">
-            <div class="card recommendation-post ">
-               <a href="{{ obj.get_absolute_url }}"><b>{{ obj.title }}</b></a>
-                {% if obj.image %}
-                    <p><img src="{{ obj.image.url }}"></p>
-                {% else %}
-                    <p></p>
-                {% endif %}
-                <p>{{ obj.content|truncatechars:70 }}</p>
-            </div>
+
 
 {% endblock %}

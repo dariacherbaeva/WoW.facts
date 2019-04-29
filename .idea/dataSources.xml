@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="fbd01d99-3c05-4875-a1b9-e826ed89b114">
+    <data-source source="LOCAL" name="db" uuid="785b3c0d-c062-4a0e-8de7-d44285c99879">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\Ибрагимова Алина\PycharmProjects\WOW\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\user1\PycharmProjects\WoW.facts\db.sqlite3</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>

@@ -1,7 +1,9 @@
 from django import forms
 
+from blog.models import Post
 
 
-<forms action='' method='post'>
-            <input type="submit" value="Лайкни сука" id="add_like" >
-            </form>
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'description', 'keywords', 'image', 'content')

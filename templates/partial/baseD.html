@@ -11,11 +11,12 @@
 <body>
 <div>
     <div class="p-3 head-color head-container shadow d-flex flex-wrap align-content-center ">
-        <div class="head-text"><h1 class="head-text"><a href="{% url 'home' %}" class="text-black">WoW.facts();</a></h1></div>
+        <div class="head-text"><h1 class="head-text"><a href="{% url 'home' %}" class="text-black">WoW.facts();</a></h1>
+        </div>
         {% if user.is_authenticated %}
             <div class="profile-mini  ">
-
-                {{ user.username }}
+               {% comment %}<a href="{% url 'single_new' %}" class="top-menu text-black">Новый пост</a> {% endcomment %}
+                <a href="{% url 'user_list' id=user.id %}" class="top-menu text-black">{{ user.username }}</a>
                 <button class="btn btn-outline-secondary btn-sm" a href="accounts/logout">
                     <a href="{% url 'logout' %}">Выйти</a>
                 </button>

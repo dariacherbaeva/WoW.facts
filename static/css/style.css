@@ -143,10 +143,9 @@ margin-top: 20px;
 width: 700px;
 height: auto;
 background-color: rgba(224, 165, 124, 0.7);
-color-text: black;
-}
+color-text: black; }
 
-.post p{
+.content p{
 padding: 7px;}
 
 .p-3 h1{
@@ -224,3 +223,10 @@ float: left;
 height: auto;
 margin-top:80px;}
 
+.date {
+    color: #828282;
+}
+
+.post-form textarea, .post-form input {
+    width: 100%;
+}
